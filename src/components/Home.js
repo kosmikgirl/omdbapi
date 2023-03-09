@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { Movie } from "./Movie";
+import { AudioOutlined } from "@ant-design/icons";
+import { Input, Space } from "antd";
+const { Search } = Input;
 
 export const Home = () => {
   const apiKey = "d937664d";
@@ -11,25 +14,31 @@ export const Home = () => {
 
   const initialData = useFetch(omdbapiURL, { results: [] });
 
-  useEffect(() => {
-    console.log(initialData, "initial");
-  }, [initialData]);
-
   return (
     <div>
-      <h1>Home</h1>
-      <form>
-        <input
-          type="search"
-          name="search-movie"
-          id="search-movie"
+      <h1>Home: Search Movies on Omdb API </h1>
+
+        <Search
+          placeholder="Search movies by Title"
+          allowClear
           onChange={(e) => setTitle(e.target.value)}
-        ></input>
-      </form>
+          onSearch={setTitle}
+          style={{
+            width: 400,
+          }}
+        />
+
       <div className="movieContainer">
         {initialData &&
           initialData.map(({ Title, Poster, Type, Year, imdbID }) => (
-            <Movie title={Title} poster={Poster} type={Type} year={Year} id={imdbID} />
+            <Movie
+            key={imdbID}
+              title={Title}
+              poster={Poster}
+              type={Type}
+              year={Year}
+              id={imdbID}
+            />
           ))}
       </div>
     </div>
