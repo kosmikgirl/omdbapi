@@ -3,3 +3,14 @@
     flex-direction: column;
     align-items: center;
 }
+
+.search-box {
+    width: 400px;
+    padding-block: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .search-box {
+        width: 90%;
+    }
+}
