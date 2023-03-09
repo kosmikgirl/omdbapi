@@ -9,16 +9,24 @@ const { Search } = Input;
 const apiKey = process.env.REACT_APP_API_ACCESS_TOKEN;
 
 export const Home = () => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [isMovie, setMovie] = useState(true);
-  const [isSeries, setSeries] = useState(false);
+  const [isSeries, setSeries] = useState(true);
+  
 
   const bySearch = `s=${title}`;
-  const addType = isSeries ? `series` : `movie`;
+  const type = isSeries ? `series` : `movie`;
 
-  const omdbapiURL = `http://www.omdbapi.com/?${bySearch}&type=${addType}&apikey=${apiKey}`;
+  const addType = (isSeries || isMovie) ? `&type=${type}`: '';
+
+  const omdbapiURL = `http://www.omdbapi.com/?${bySearch}${addType}&apikey=${apiKey}`;
 
   const initialMovieData = useFetch(omdbapiURL, { results: [] });
+
+  const setAll = (value) => {
+    setSeries(value)
+    setMovie(value);
+  }
 
   useEffect(() => {
     console.log(initialMovieData, isSeries, isMovie, omdbapiURL);
@@ -27,7 +35,6 @@ export const Home = () => {
   return (
     <div>
       <h1>Home: Search Movies on Omdb API </h1>
-
       <div>
         <h2>Search by:</h2>
         <Checkbox
@@ -41,6 +48,12 @@ export const Home = () => {
           onChange={(e) => setMovie(e.target.checked)}
         >
           Movies
+        </Checkbox>
+        <Checkbox
+          checked={isMovie && isSeries}
+          onChange={(e) => setAll(e.target.checked)}
+        >
+          All Types
         </Checkbox>
       </div>
 

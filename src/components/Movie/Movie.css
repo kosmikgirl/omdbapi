@@ -1,4 +1,5 @@
 .movie-box {
+    cursor: pointer;
     background-color: whitesmoke;
     padding: 1rem;
     margin: 1rem;
