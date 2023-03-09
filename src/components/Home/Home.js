@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { Input } from "antd";
+import React, { useState } from "react";
 import { useFetch } from "../../hooks/useFetch";
+import { Check } from "../Checkbox/Checkbox";
 import { Movie } from "../Movie/Movie";
 import './Home.css';
-import { Input, Checkbox } from "antd";
-import { Check } from "../Checkbox/Checkbox";
 
 
 const { Search } = Input;
@@ -64,7 +64,7 @@ export const Home = () => {
               year={Year}
               id={imdbID}
             />
-          )) : <p>No Results... yet! &#128517;</p>}
+          )) : <p>No Results... &#129300;</p>}
       </div>
     </div>
   );

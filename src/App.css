@@ -3,6 +3,12 @@
   font-family: 'Roboto', sans-serif;
 }
 
+@media only screen and (max-width: 600px) {
+  .App {
+    margin-inline: 1rem;
+  }
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

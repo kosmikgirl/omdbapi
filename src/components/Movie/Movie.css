@@ -1,7 +1,13 @@
 .movie-box {
-    cursor: pointer;
-    background-color: whitesmoke;
-    padding: 1rem;
-    margin: 1rem;
-    width: 50%;
+  cursor: pointer;
+  background-color: whitesmoke;
+  padding: 1rem;
+  margin: 1rem;
+  width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+  .movie-box {
+    width: 100%;
+  }
 }
