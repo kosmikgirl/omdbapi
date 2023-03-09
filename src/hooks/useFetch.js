@@ -18,6 +18,7 @@ export function useFetch(url, defaultData) {
   }
   useEffect(() => {
     getDataFromAPI();
+    // eslint-disable-next-line 
   }, [url]);
 
   if (data.Search) {
