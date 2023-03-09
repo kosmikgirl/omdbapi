@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export function useFetch(url, defaultData) {
   const [data, updateData] = useState(defaultData);
@@ -7,7 +7,6 @@ export function useFetch(url, defaultData) {
     try {
       if (!url) {
         updateData(defaultData);
-        //   console.log(things);
         return;
       }
       const resp = await fetch(url);
@@ -26,5 +25,3 @@ export function useFetch(url, defaultData) {
   }
   return null;
 }
-
-// end useFetch
