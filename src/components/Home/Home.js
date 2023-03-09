@@ -3,6 +3,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { Movie } from "../Movie/Movie";
 import './Home.css';
 import { Input, Checkbox } from "antd";
+import { Check } from "../Checkbox/Checkbox";
 
 
 const { Search } = Input;
@@ -13,7 +14,6 @@ export const Home = () => {
   const [isMovie, setMovie] = useState(true);
   const [isSeries, setSeries] = useState(true);
   
-
   const bySearch = `s=${title}`;
   const type = isSeries ? `series` : `movie`;
 
@@ -25,40 +25,25 @@ export const Home = () => {
 
   const setAll = (value) => {
     setSeries(value)
-    setMovie(value);
+    setMovie(value)
   }
 
-  useEffect(() => {
-    console.log(initialMovieData, isSeries, isMovie, omdbapiURL);
-  }, [initialMovieData]);
+  const checkboxes = [
+    {checked: isSeries, method: setSeries, label: 'Series'},
+    {checked: isMovie, method: setMovie, label: 'Movies'},
+    {checked: (isMovie && isSeries) || (!isMovie && !isSeries), method: setAll, label: 'All Types'}
+  ]
 
   return (
     <div>
       <h1>Home: Search Movies on Omdb API </h1>
       <div>
         <h2>Search by:</h2>
-        <Checkbox
-          checked={isSeries}
-          onChange={(e) => setSeries(e.target.checked)}
-        >
-          Series
-        </Checkbox>
-        <Checkbox
-          checked={isMovie}
-          onChange={(e) => setMovie(e.target.checked)}
-        >
-          Movies
-        </Checkbox>
-        <Checkbox
-          checked={isMovie && isSeries}
-          onChange={(e) => setAll(e.target.checked)}
-        >
-          All Types
-        </Checkbox>
+        {checkboxes.map((box) => <Check key={box.label} checked={box.checked} onCheckboxChange={box.method} label={box.label}/>)}
       </div>
 
       <Search
-        placeholder="Search movies by Title"
+        placeholder="Search by title"
         allowClear
         onChange={(e) => setTitle(e.target.value)}
         onSearch={setTitle}
@@ -69,7 +54,7 @@ export const Home = () => {
       />
 
       <div className="movie-container">
-        {initialMovieData &&
+        {initialMovieData ?
           initialMovieData.map(({ Title, Poster, Type, Year, imdbID }) => (
             <Movie
               key={imdbID}
@@ -79,7 +64,7 @@ export const Home = () => {
               year={Year}
               id={imdbID}
             />
-          ))}
+          )) : <p>No Results... yet! &#128517;</p>}
       </div>
     </div>
   );
