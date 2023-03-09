@@ -1,22 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { Movie } from "./Movie";
-import { AudioOutlined } from "@ant-design/icons";
-import { Input, Space } from "antd";
+import { Input, Checkbox } from "antd";
 const { Search } = Input;
 
+const apiKey = process.env.REACT_APP_API_ACCESS_TOKEN;
+
 export const Home = () => {
-  const apiKey = "d937664d";
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
+  const [isMovie, setMovie] = useState(true);
+  const [isSeries, setSeries] = useState(false);
+
   const bySearch = `s=${title}`;
+  const addType = isSeries ? `series` : `movie`; 
 
-  const omdbapiURL = `http://www.omdbapi.com/?${bySearch}&apikey=${apiKey}`;
+  const omdbapiURL = `http://www.omdbapi.com/?${bySearch}&type=${addType}&apikey=${apiKey}`;
 
-  const initialData = useFetch(omdbapiURL, { results: [] });
+  const initialMovieData = useFetch(omdbapiURL, { results: [] });
+
+  useEffect(() => {
+    console.log(initialMovieData, isSeries, isMovie);
+  }, [initialMovieData]);
 
   return (
     <div>
       <h1>Home: Search Movies on Omdb API </h1>
+
+      <div>
+        <h2>Search by:</h2>
+        <Checkbox checked={isSeries} onChange={(e) => setSeries(e.target.checked)}>
+          Series
+        </Checkbox>
+        <Checkbox checked={isMovie} onChange={(e) => setMovie(e.target.checked)}>
+          Movies
+        </Checkbox>
+      </div>
 
         <Search
           placeholder="Search movies by Title"
@@ -25,12 +43,13 @@ export const Home = () => {
           onSearch={setTitle}
           style={{
             width: 400,
+            paddingBlock: '1rem'
           }}
         />
 
       <div className="movieContainer">
-        {initialData &&
-          initialData.map(({ Title, Poster, Type, Year, imdbID }) => (
+        {initialMovieData &&
+          initialMovieData.map(({ Title, Poster, Type, Year, imdbID }) => (
             <Movie
             key={imdbID}
               title={Title}
