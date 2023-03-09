@@ -1,8 +1,9 @@
 import React from "react";
+import './Movie.css';
 
 export const Movie = ({ title, poster, type, year, id }) => {
   return (
-    <div className="movieBox">
+    <div className="movie-box">
       <h1>{title}</h1>
       {poster !== 'N/A' && <img src={poster} /> }
       <p>Type: {type}</p> <p>Year Released: {year}</p>
