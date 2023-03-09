@@ -6,7 +6,9 @@ It is using [Ant Design](https://ant.design/)
 
 ## Update with your own OMDB ApiKey
 
-Please add an .env.local file or modify the existing one with REACT_APP_API_ACCESS_TOKEN=[YOURAPIKEY]
+Please add an .env.local file or modify the existing one with 
+
+### `REACT_APP_API_ACCESS_TOKEN=[YOURAPIKEY]`
 
 ## Available Scripts
 
