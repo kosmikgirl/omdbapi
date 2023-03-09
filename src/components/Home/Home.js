@@ -47,10 +47,6 @@ export const Home = () => {
         allowClear
         onChange={(e) => setTitle(e.target.value)}
         onSearch={setTitle}
-        // style={{
-        //   width: 400,
-        //   paddingBlock: "1rem",
-        // }}
         className="search-box"
       />
 
