@@ -1,6 +1,12 @@
-# Getting Started with Create React App
+# OMBD Api React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It is using [Ant Design](https://ant.design/)
+
+
+## Update with your own OMDB ApiKey
+
+Please add an .env.local file or modify the existing one with REACT_APP_API_ACCESS_TOKEN=[YOURAPIKEY]
 
 ## Available Scripts
 
